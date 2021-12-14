@@ -14,6 +14,10 @@ export default {
   router: {
     prefetchLinks: true // default is true
   },
+  loading: {
+    color: '#42b983',
+    height: '5px'
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'Awesome Products',
@@ -37,6 +41,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '~/plugins/axios.js',
     '~/plugins/repositories.js'
   ],
 
@@ -66,11 +71,11 @@ export default {
 
   publicRuntimeConfig: {
     axios: {
-      baseURL: process.env.SERVER1_REST_API_BASE_URL // default axios url
+      baseURL: process.env.SERVER1_REST_API_BASE_URL || 'https://storerestservice.azurewebsites.net/api/'
     },
 
-    server2BaseURL: process.env.SERVER2_REST_API_BASE_URL, // alternative server url
-    authServerURL: process.env.AUTH_SERVER_URL
+    server2BaseURL: process.env.SERVER2_REST_API_BASE_URL,
+    authServerURL: process.env.AUTH_SERVER_URL || 'https://www.mocky.io/v2/5b9149823100002a00939952'
   },
   privateRuntimeConfig: {
     apiSecret: process.env.SERVER1_REST_API_SECRET

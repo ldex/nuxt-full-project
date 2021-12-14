@@ -21,7 +21,12 @@ export default {
         content: 'We have all the products you need!',
       },
     ],
-  }
+  },
+  errorCaptured(error) {
+      console.error('Catching error in layout: ', error.message);
+      return true;
+  },
+
 }
 </script>
 

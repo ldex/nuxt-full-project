@@ -20,7 +20,7 @@
       <p>Discontinued? {{ product.discontinued }}</p>
       <p>Modified date: {{ product.modifiedDate }}</p>
       <p>
-        <button @click="deleteConfirm" v-if="loggedIn">Delete</button>
+        <button v-if="loggedIn" @click="deleteConfirm">Delete</button>
       </p>
     </section>
   </div>

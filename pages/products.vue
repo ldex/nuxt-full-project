@@ -134,6 +134,7 @@ export default {
     nextPage() {
       this.pageNumber++
       this.selectedProduct = null
+      throw new Error(`test`);
     },
     prevPage() {
       this.pageNumber--

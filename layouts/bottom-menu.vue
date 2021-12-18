@@ -5,7 +5,7 @@
     <nav-bar></nav-bar>
     <footer>
       <hr />
-      Copyright Vue Academy 2021
+      Copyright Vue Academy 2022
     </footer>
   </div>
 </template>

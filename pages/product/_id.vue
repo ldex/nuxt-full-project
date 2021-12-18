@@ -1,48 +1,28 @@
 <template>
   <div>
-    <section v-if="error">
-      {{ error.message }}
-    </section>
-    <section v-else>
-      <h2>{{ product.name }}</h2>
-      <img
-        :src="
-          product.imageUrl
-            ? product.imageUrl
-            : 'https://placeimg.com/200/200/tech'
-        "
-        width="200"
-        style="float: right"
-      />
-      <h3>{{ product.description }}</h3>
-      <p>Price: {{ product.price }}</p>
-      <p>Fixed price? {{ product.fixedPrice }}</p>
-      <p>Discontinued? {{ product.discontinued }}</p>
-      <p>Modified date: {{ product.modifiedDate }}</p>
-      <p>
-        <button v-if="loggedIn" @click="deleteConfirm">Delete</button>
-      </p>
-    </section>
+    <h2>{{ product.name }}</h2>
+    <img
+      :src="
+        product.imageUrl
+          ? product.imageUrl
+          : 'https://placeimg.com/200/200/tech'
+      "
+      width="200"
+      style="float: right"
+    />
+    <h3>{{ product.description }}</h3>
+    <p>Price: {{ product.price }}</p>
+    <p>Fixed price? {{ product.fixedPrice }}</p>
+    <p>Discontinued? {{ product.discontinued }}</p>
+    <p>Modified date: {{ product.modifiedDate }}</p>
+    <p>
+      <button v-if="loggedIn" @click="deleteConfirm">Delete</button>
+    </p>
   </div>
 </template>
 
 <script>
 export default {
-  // asyncData(context) {
-  //   context.loading = true;
-  //   const id = context.params.id;
-  //   return context.$axios
-  //     .get('https://storerestservice.azurewebsites.net/api/products/' + id)
-  //     .then((response) => {
-  //       return {
-  //         product: response.data,
-  //       };
-  //     })
-  //     .catch((error) => {
-  //       context.error = error;
-  //     })
-  //     .finally(() => (context.loading = false));
-  // },
   data() {
     return {
       error: null,
@@ -87,13 +67,13 @@ export default {
             this.$router.push({ name: 'products' })
           })
           .catch((error) => {
-            this.$router.push({ name: 'error', params: { error } })
+            this.$nuxt.error(error)
           })
       }
     },
     deleteProduct(id) {
       return this.$store.dispatch('products/deleteProduct', id)
-    }
+    },
   },
 }
 </script>

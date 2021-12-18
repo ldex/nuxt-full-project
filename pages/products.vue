@@ -34,9 +34,6 @@
 </template>
 
 <script>
-// const baseUrl = 'https://storerestservice.azurewebsites.net/api/products/'
-// const getUrl = baseUrl + '?$orderby=ModifiedDate%20desc'
-
 export default {
   props: {
     pageSize: {
@@ -44,18 +41,6 @@ export default {
       required: false,
       default: 5,
     },
-  },
-  asyncData(context) {
-    // const productsUrl = context.$config.baseURL + 'products';
-    // const productsByDateUrl = productsUrl + '?$orderby=ModifiedDate%20desc'
-    // return context.$axios.get(productsByDateUrl).then((result) => {
-    //   return { products: result.data }
-    // })
-    //  const params = { $orderby: 'ModifiedDate asc'};
-    // const options = { params };
-    // return context.$repositories.products.get().then((result) => {
-    //   return { products: result.data }
-    // })
   },
   data() {
     return {
@@ -134,7 +119,6 @@ export default {
     nextPage() {
       this.pageNumber++
       this.selectedProduct = null
-      throw new Error(`test`);
     },
     prevPage() {
       this.pageNumber--

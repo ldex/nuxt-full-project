@@ -10,7 +10,9 @@
       <span>Filter by name: <input v-model="filterName" /></span>
     </fieldset>
 
-    <ul class="products">
+    <h2 v-if="$fetchState.pending">Fetching products...</h2>
+    <h2 v-else-if="$fetchState.error" class="errorMessage">Error while fetching products</h2>
+    <ul v-else class="products">
       <nuxt-link
         v-for="product in sortedFilteredPaginatedProducts"
         :key="product.id"
@@ -51,8 +53,8 @@ export default {
       pageNumber: 1,
     }
   },
-  async fetch({ store }) {
-    await store.dispatch('products/fetchProducts')
+  async fetch() {
+    await this.$store.dispatch('products/fetchProducts')
   },
   head() {
     return {
@@ -107,6 +109,12 @@ export default {
     sortDir() {
       this.pageNumber = 1
     },
+  },
+  activated() {
+    // Call fetch again if last fetch more than 30 sec ago
+    if (this.$fetchState.timestamp <= Date.now() - 30000) {
+      this.$fetch()
+    }
   },
   methods: {
     sort(s) {

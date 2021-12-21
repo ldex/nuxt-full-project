@@ -1,5 +1,7 @@
 <template>
-  <div>
+  <h2 v-if="$fetchState.pending">Fetching product...</h2>
+  <h2 v-else-if="$fetchState.error" class="errorMessage">Error while fetching product!</h2>
+  <div v-else>
     <h2>{{ product.name }}</h2>
     <img
       :src="
@@ -23,21 +25,9 @@
 
 <script>
 export default {
-  data() {
-    return {
-      error: null,
-    }
-  },
-  async fetch({ store, params, error }) {
-    const id = params.id
-    try {
-      await store.dispatch('products/fetchProduct', id)
-    } catch (e) {
-      error({
-        statusCode: 503,
-        message: 'Unable to fetch product #' + id,
-      })
-    }
+  async fetch() {
+    const id = this.$nuxt.context.params.id
+    await this.$store.dispatch('products/fetchProduct', id)
   },
   head() {
     return {
